@@ -4,4 +4,4 @@ Allow: /
 # Não indexar o endpoint de backend do formulário
 Disallow: /contact.php
 
-Sitemap: https://danielguedes.com.br/sitemap.xml
+Sitemap: https://odanielguedes.com.br/sitemap.xml

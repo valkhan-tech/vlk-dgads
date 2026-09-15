@@ -196,9 +196,15 @@
   /* Header */
   header.site-header{
     position:sticky; top:0; z-index:100;
+    border-bottom:1px solid var(--border);
+  }
+  /* O blur fica num pseudo-elemento: backdrop-filter no próprio header criaria um
+     "containing block" para os filhos com position:fixed (o menu mobile), prendendo
+     o painel dentro da faixa estreita do header em vez de cobrir a tela. */
+  header.site-header::before{
+    content:''; position:absolute; inset:0; z-index:-1;
     background:rgba(10,21,38,0.88);
     backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
   }
   .nav-wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--container); margin:0 auto;}
   .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-head); font-weight:700; font-size:18px;}

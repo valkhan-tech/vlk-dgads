@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Não indexar o endpoint de backend do formulário
+Disallow: /contact.php
+
+Sitemap: https://danielguedes.com.br/sitemap.xml

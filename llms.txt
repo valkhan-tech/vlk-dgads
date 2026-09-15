@@ -1,0 +1,31 @@
+# Daniel Guedes — Gestão de Tráfego Pago
+
+> Daniel Guedes é gestor de tráfego pago independente, especializado em Meta Ads, Google Ads e otimização de Perfil do Google (Google Meu Negócio) para negócios locais com ticket definido: clínicas, consultórios, advocacia, imobiliárias, corretores e prestadores de serviço. Atendimento em todo o Brasil. Diferencial: quem fala com o cliente é a mesma pessoa que opera a conta de anúncios — sem repasse para atendimento ou equipe júnior.
+
+## Sobre
+
+- Nome: Daniel Guedes
+- Papel: Gestor de Tráfego Pago (pessoa física, não agência)
+- Contato: WhatsApp +55 11 99408-4516 · Instagram @danielguedes.go
+- Metodologia própria: Método MOTOR (Mapeamento, Oferta, Tráfego, Otimização, Resultado)
+- Modelo de atendimento: poucas contas simultâneas, acompanhamento direto, sem intermediários
+- Conta de anúncios sempre no nome do cliente (Meta e Google)
+
+## Serviços
+
+- Gestão de Meta Ads (Facebook e Instagram Ads)
+- Gestão de Google Ads
+- Otimização de Perfil do Google (Google Meu Negócio): categorias, avaliações, rastreamento de buscas
+- Diagnóstico gratuito de 30 minutos (formulário na página inicial)
+
+## Para quem não é indicado
+
+Negócios de infoproduto, lançamento digital ou e-commerce de alto volume não são o público-alvo declarado deste gestor.
+
+## Páginas
+
+- [Página inicial](https://danielguedes.com.br/): apresentação, dores do público, Método MOTOR, depoimentos, FAQ e formulário de diagnóstico gratuito.
+
+## Perguntas frequentes
+
+As respostas completas às dúvidas mais comuns (prazo de resultado, investimento mínimo, garantia, propriedade da conta de anúncios, comparação com agências) estão na seção FAQ da página inicial, também disponíveis em dados estruturados (schema.org/FAQPage) no HTML.

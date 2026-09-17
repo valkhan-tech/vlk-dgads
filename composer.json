@@ -1,8 +1,5 @@
 {
-    "name": "danielguedes/site-contato",
-    "description": "Formulario de contato do site com envio via PHPMailer",
     "require": {
-        "php": ">=8.0",
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.10"
     }
 }

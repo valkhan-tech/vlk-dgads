@@ -1255,11 +1255,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="field">
             <label for="whatsapp">WhatsApp</label>
-            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="numeric" maxlength="15" placeholder="(00) 00000-0000" required>
           </div>
           <div class="field">
             <label for="instagram">Instagram profissional (opcional)</label>
-            <input type="text" id="instagram" name="instagram" placeholder="@seuinstagram">
+            <input type="text" id="instagram" name="instagram" value="@" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@seuinstagram">
           </div>
           <div class="field">
             <label for="categoria">Qual seu negócio ou área de atuação?</label>
@@ -1268,7 +1268,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="field">
             <label for="investe">Já investe em tráfego pago?</label>
             <select id="investe" name="investe" required>
-              <option value="">Selecione</option>
+              <option value="" selected disabled>Selecione</option>
               <option value="Sim">Sim</option>
               <option value="Nao">Não</option>
             </select>
@@ -1276,8 +1276,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="field">
             <label for="valor">Quanto investe ou pretende investir por mês?</label>
             <select id="valor" name="valor" required>
-              <option value="">Selecione o valor</option>
-              <option value="Menos de R$ 1 mil">Menos de R$ 1 mil</option>
+              <option value="" selected disabled>Selecione o valor</option>
+              <option value="Até R$ 1 mil">Menos de R$ 1 mil</option>
               <option value="Entre R$ 1 mil e R$ 3 mil">Entre R$ 1 mil e R$ 3 mil</option>
               <option value="Mais de R$ 3 mil">Mais de R$ 3 mil</option>
             </select>
@@ -1432,8 +1432,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var loadedAtField = document.getElementById('loadedAt');
     var msgEl = document.getElementById('leadFormMsg');
     var submitBtn = document.getElementById('leadSubmitBtn');
+    var whatsappField = document.getElementById('whatsapp');
+    var instagramField = document.getElementById('instagram');
     var pageLoadedAt = Date.now();
     loadedAtField.value = pageLoadedAt;
+
+    function formatWhatsapp(value){
+      var digits = value.replace(/\D/g, '');
+
+      // Aceita também números colados com o código do Brasil (+55).
+      if (digits.length > 11 && digits.slice(0, 2) === '55') {
+        digits = digits.slice(2);
+      }
+      digits = digits.slice(0, 11);
+
+      if (digits.length === 0) return '';
+      if (digits.length <= 2) return '(' + digits;
+      if (digits.length <= 7) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+      return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+    }
+
+    whatsappField.addEventListener('input', function(){
+      whatsappField.value = formatWhatsapp(whatsappField.value);
+    });
+
+    function normalizeInstagram(){
+      var username = instagramField.value.replace(/\s+/g, '').replace(/@/g, '');
+      instagramField.value = '@' + username.slice(0, 30);
+    }
+
+    instagramField.addEventListener('input', normalizeInstagram);
+    instagramField.addEventListener('keydown', function(e){
+      if (e.key === ' ') {
+        e.preventDefault();
+      }
+      if (
+        (e.key === 'Backspace' && instagramField.selectionStart <= 1 && instagramField.selectionEnd <= 1) ||
+        (e.key === 'Delete' && instagramField.selectionStart === 0 && instagramField.selectionEnd <= 1)
+      ) {
+        e.preventDefault();
+      }
+    });
+    instagramField.addEventListener('click', function(){
+      if (instagramField.selectionStart === 0) {
+        instagramField.setSelectionRange(1, 1);
+      }
+    });
 
     function showMsg(text, isError){
       msgEl.textContent = text;
@@ -1455,7 +1499,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       var nome = data.get('nome');
       var whatsapp = data.get('whatsapp');
-      var instagram = data.get('instagram') || 'não informado';
+      var instagramValue = data.get('instagram');
+      var instagram = instagramValue && instagramValue !== '@' ? instagramValue : 'não informado';
       var categoria = data.get('categoria');
       var investe = data.get('investe');
       var valor = data.get('valor');
@@ -1488,7 +1533,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
         form.reset();
       }).catch(function(){
-        showMsg('Não consegui enviar agora. Chame direto no WhatsApp abaixo.', true);
+        showMsg('Não foi possível enviar a solicitação. Chame direto no WhatsApp abaixo.', true);
       }).finally(function(){
         submitBtn.disabled = false;
         submitBtn.textContent = 'Quero meu diagnóstico de 30 minutos';

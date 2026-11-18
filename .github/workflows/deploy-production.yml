@@ -1,0 +1,17 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - deploy/production
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Disparar deploy
+        run: |
+          curl --fail --silent --show-error \
+            -X GET \
+            "http://187.53.123.242:3000/api/compose/deploy/208ee2f183b523346289f937b2d9c0df30185159e1cae812"

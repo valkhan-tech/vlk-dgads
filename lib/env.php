@@ -19,6 +19,13 @@ function load_env(string $path): array
         }
     }
 
+    // Variáveis de ambiente reais (ex.: Docker/Easypanel) têm prioridade sobre o .env
+    foreach (array_keys(getenv()) as $key) {
+        if (str_starts_with($key, 'SMTP_') || str_starts_with($key, 'MAIL_')) {
+            $env[$key] = (string) getenv($key);
+        }
+    }
+
     $cache = $env;
     return $env;
 }
